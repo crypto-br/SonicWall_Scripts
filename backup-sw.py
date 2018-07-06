@@ -1,3 +1,8 @@
+#-------------------------------------------#
+#-- Backup SonicWall -----------------------#
+#-- by: @cryptobr - on Telegram ------------#
+#-------------------------------------------#
+
 import sys
 sys.stderr = open('/dev/null')       # Silence silly warnings from paramiko
 import paramiko as pm
