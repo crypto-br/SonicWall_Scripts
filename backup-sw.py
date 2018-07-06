@@ -20,30 +20,36 @@ USER = 'USER' # ADMIN USER
 PASSWORD = 'PASS' # PASSWORD ADMIN USER
 
 
+try:
+    client = pm.SSHClient()
+    client.load_system_host_keys()
+    client.load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
+    client.set_missing_host_key_policy(AllowAllKeys())
+    client.connect(HOST, username=USER, password=PASSWORD)
 
-client = pm.SSHClient()
-client.load_system_host_keys()
-client.load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
-client.set_missing_host_key_policy(AllowAllKeys())
-client.connect(HOST, username=USER, password=PASSWORD)
+    channel = client.invoke_shell()
+    stdin = channel.makefile('wb')
+    stdout = channel.makefile('rb')
 
-channel = client.invoke_shell()
-stdin = channel.makefile('wb')
-stdout = channel.makefile('rb')
+    print ("RUNING BACKUP SONICWALL (MODEL)")
 
-print ("RUNING BACKUP SONICWALL (MODEL)")
+    stdin.write('''
+    export current-config exp ftp ftp://USERFTP:PASSWORDFTP@O.O.O.O (IPFTP)/FILE.exp
+    exit
+    ''')
+    print stdout.read()
+    print ("#---------------------------------------#")
+    time.sleep(1)
+    print ("BACKUP SONICWALL (MODEL)  - SUCCESS")
+    print ("#---------------------------------------#")
+    time.sleep(1)
 
-stdin.write('''
-export current-config exp ftp ftp://USERFTP:PASSWORDFTP@O.O.O.O (IPFTP)/FILE.exp
-exit
-''')
-print stdout.read()
-print ("#---------------------------------------#")
-time.sleep(1)
-print ("BACKUP SONICWALL (MODEL)  - SUCCESS")
-print ("#---------------------------------------#")
-time.sleep(1)
+    stdout.close()
+    stdin.close()
+    client.close()
 
-stdout.close()
-stdin.close()
-client.close()
+except socket.error:
+        print ("#---------------------------------------#")
+        print ("SonicWall without connection")
+        print ("BACKUP SONICWALL (MODEL)  - ERROR")
+        print ("#---------------------------------------#")
