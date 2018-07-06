@@ -15,9 +15,9 @@ class AllowAllKeys(pm.MissingHostKeyPolicy):
     def missing_host_key(self, client, hostname, key):
         return
 
-HOST = '0.0.0.0'  # IP DO SONICWALL
-USER = 'USER' # USUARIO ADMINISTRATIVO DO SONICWALL
-PASSWORD = 'PASS' # SENHA DO USUARIO ADMINISTRATIVO
+HOST = '0.0.0.0'  # SONICWALL IP
+USER = 'USER' # ADMIN USER
+PASSWORD = 'PASS' # PASSWORD ADMIN USER
 
 
 
@@ -31,18 +31,17 @@ channel = client.invoke_shell()
 stdin = channel.makefile('wb')
 stdout = channel.makefile('rb')
 
-print ("REALIZANDO O BACKUP DO FIREWALL (MODELO)")
+print ("RUNING BACKUP SONICWALL (MODEL)")
 
 stdin.write('''
-export current-config exp ftp ftp://USERFTP:SENHAFTP@O.O.O.O (IPFTP)/ARQUIVO.exp
+export current-config exp ftp ftp://USERFTP:PASSWORDFTP@O.O.O.O (IPFTP)/FILE.exp
 exit
 ''')
 print stdout.read()
-print ("################################################################")
+print ("#---------------------------------------#")
 time.sleep(1)
-print ("BACKUP FIREWALL (MODELO) REALIZADO COM SUCESSO")
-print ("################################################################")
-print ("################################################################")
+print ("BACKUP SONICWALL (MODEL)  - SUCCESS")
+print ("#---------------------------------------#")
 time.sleep(1)
 
 stdout.close()
