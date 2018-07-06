@@ -1,6 +1,6 @@
 # Backup script for SonicWall - all versions <br />
 
-This script run in all versions UTM Sonicwall's, one FTP server is necessary for éxport backup file <br />
+This script run in all versions UTM Sonicwall's, one FTP server is necessary for export backup file <br />
 
 Use this script combined with crontab <br />
 
