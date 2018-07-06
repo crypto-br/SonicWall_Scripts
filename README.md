@@ -8,4 +8,8 @@ ex: ***23 50 * * * python backup-sw.py*** (Everyday on 23:50 execute script back
 
 Another tip is: Combined with https://github.com/crypto-br/sendmailpython for recived Sucessful of Error in script execution. <br />
 
-ex: ***python backup-sw.py > log.txt and send log in e-mail.*** <br />
+ex: ***python backup-sw.py > log.txt and send log in e-mail.*** <br /><br />
+
+# Gateway AV Exception <br />
+
+This scritp add an ip in the exess Gateway Antvirus List <br />
