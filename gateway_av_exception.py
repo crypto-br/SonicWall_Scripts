@@ -3,7 +3,7 @@
 #-- by: @cryptobr - on Telegram ------------#
 #-------------------------------------------#
 
-# IMPORTANDO BIBLIOTECAS
+# IMPORT LIBS
 import sys
 sys.stderr = open('/dev/null')       # Silence silly warnings from paramiko
 import paramiko as pm
